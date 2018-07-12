@@ -13,8 +13,9 @@ the public picture can for the blog or shared resources.
 name tag 
 ### synchronization
 local to serve , serve to local
-### copy url 
-
+### copy url
+.idea
+.git
 
 
 
