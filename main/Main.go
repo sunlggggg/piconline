@@ -1,7 +1,12 @@
 package main
 
-import "github.com/sunlggggg/piconline/util"
+import (
+	"net/http"
+	"github.com/sunlggggg/piconline/controllers"
+)
 
-func main()  {
-	util.F1()
+
+func main() {
+	http.HandleFunc("/", controllers.Hello)
+	http.ListenAndServe(":8080",nil)
 }
