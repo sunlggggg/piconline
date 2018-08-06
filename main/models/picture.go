@@ -6,10 +6,10 @@ import (
 
 type Picture struct {
 	// 图片名
-	Name string `xml:"name"`
+	Name string `json:"name"`
 	// 是否公开
-	IsPublic bool `xml:"is_public"`
+	IsPublic bool `json:"is_public"`
 	// 上传时间
-	Time time.Time `xml:"time"`
+	Time time.Time `json:"time"`
 }
 
