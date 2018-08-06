@@ -1,12 +1,15 @@
 package main
 
 import (
+	"github.com/sunlggggg/piconline/main/controllers"
 	"net/http"
-	"github.com/sunlggggg/piconline/controllers"
+	"github.com/sunlggggg/piconline/main/utils"
 )
 
 
 func main() {
-	http.HandleFunc("/", controllers.Hello)
+	name := "main/data/1.txt"
+	utils.Write(name,"dd")
+	http.HandleFunc("/picture", controllers.Picture)
 	http.ListenAndServe(":8080",nil)
 }

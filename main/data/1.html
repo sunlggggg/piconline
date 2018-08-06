@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>上传文件</title>
 </head>
 <body>
-$END$
+<form enctype="multipart/form-data" action="http://localhost:8080/picture" method="post">
+    <input type="file" name="pic" />
+    <input type="submit" value="upload" />
+</form>
 </body>
 </html>

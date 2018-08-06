@@ -14,8 +14,7 @@ name tag
 ### synchronization
 local to serve , serve to local
 ### copy url
-.idea
-.git
+
 
 
 
