@@ -14,7 +14,7 @@ func main() {
 	}
 	fmt.Println(db)
 
-	db.Exec("insert into  user (user_name, user_email, register_time) values ('sunlggggg','sunlggggg@gmail.com','12345');")
+	db.Exec("insert into  user (name, email, register_time) values ('sunlggggg','sunlggggg@gmail.com','12345');")
 
 	rows, err := db.Query("select  * from user ")
 	if err != nil {
@@ -50,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db.Exec("delete from user  where user_id > 0 && user_id < 100 ")
+	db.Exec("delete from user  where id > 0 && user_id < 100 ")
 
-	db.Exec("update user set user_name = 'sun' where user_id = 22 ; ")
+	db.Exec("update user set name = 'sun' where id = 22 ; ")
 }

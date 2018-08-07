@@ -249,13 +249,13 @@ row.Close()
 ``` sql
 mysql> create database piconline;
 mysql> use database
-mysql> CREATE TABLE IF NOT EXISTS `user`(
-        `user_id` INT UNSIGNED AUTO_INCREMENT,
-        `user_name` VARCHAR(100) NOT NULL,
-        `user_email` VARCHAR(40) NOT NULL,
-        `register_time` BIGINT NOT NULL,
-        PRIMARY KEY ( `user_id` )
-       )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+mysql> create table user(
+        id            bigint auto_increment
+            primary key,
+        name          varchar(100) not null,
+        email         varchar(40)  not null,
+        register_time bigint       not null
+       );
        
 ```
 ENGINE 设置存储引擎，CHARSET 设置编码
