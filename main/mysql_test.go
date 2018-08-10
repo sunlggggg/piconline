@@ -2,12 +2,13 @@ package main
 
 import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"testing"
 )
 
-func main() {
+func TestMysql(t *testing.T) {
 	db, err := sql.Open("mysql", "root:123456@tcp(0.0.0.0:3306)/piconline?charset=utf8")
 	if err != nil {
 		println(err)

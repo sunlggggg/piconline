@@ -2,9 +2,17 @@ package main
 
 import (
 	"github.com/sunlggggg/piconline/main/controllers"
-	"net/http"
 	"github.com/sunlggggg/piconline/main/utils"
+	"net/http"
 )
+
+type Rect struct {
+	width, length float64
+}
+
+func (rect Rect) area() float64 {
+	return rect.width * rect.length
+}
 
 func main() {
 	name := "main/data/1.txt"

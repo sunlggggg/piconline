@@ -1,23 +1,9 @@
-# piconline
-picture serve for private and public 
+# 图片服务
 
-## concept
-### private picture 
-when we use the markdown to insert a picture, we use the http protocal or the local picture. 
-For the private picture, we can't use the http protocal to use it. So we need to download from our picture serve then to use it. 
-### public picture 
-the public picture can for the blog or shared resources. 
-
-## function
-### search 
-name tag 
-### synchronization
-local to serve , serve to local
-### copy url
-
-### file tree structure
-
-
-
-
-
+## go基础
+[go interface](/document/go\ interface.md)
+[go mysql](/document/go\ mysql使用.md)
+[go uc](/document/go\ uint \ case.md)
+[go http 实现restful](/document/go使用http实现restful.md)
+[go slice ](/document/go\ slice\ 动态增删.md)
+[go  struct](/document/go\ struct.md)

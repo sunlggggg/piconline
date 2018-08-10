@@ -1,17 +1,17 @@
 package controllers
 
 import (
-	"net/http"
 	"fmt"
-	"strings"
 	"github.com/sunlggggg/piconline/main/code"
-	"os"
 	"io"
+	"net/http"
+	"os"
+	"strings"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm()  //解析参数，默认是不会解析的
-	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
+	r.ParseForm()       //解析参数，默认是不会解析的
+   	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
 	fmt.Println("path", r.URL.Path)
 	fmt.Println("scheme", r.URL.Scheme)
 	fmt.Println(r.Form["url_long"])
@@ -23,22 +23,22 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 }
 
 // post : curl http://localhost:8080/picture -F "pic=@1.jpg"
-func Picture(w http.ResponseWriter, r *http.Request){
+func Picture(w http.ResponseWriter, r *http.Request) {
 	// 读取请求类型
 	switch r.Method {
 	case http.MethodGet:
 		// 下载图片
 		println("rest get ...  ")
-	    fout ,err:=os.Open("upload/1.jpg")
-	    if err != nil {
-	    	println(err)
+		fout, err := os.Open("upload/1.jpg")
+		if err != nil {
+			println(err)
 		}
 		defer fout.Close()
-	    buf := make([]byte,1024)
-	    for {
-	    	n, _:= fout.Read(buf)
-	    	if 0 == n {
-	    		break
+		buf := make([]byte, 1024)
+		for {
+			n, _ := fout.Read(buf)
+			if 0 == n {
+				break
 			}
 			println(n)
 			w.Write(buf[:n])
@@ -54,7 +54,7 @@ func Picture(w http.ResponseWriter, r *http.Request){
 		}
 		defer file.Close()
 		//0666 赋予读写权限
-		f, err := os.OpenFile("upload/" + handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		f, err := os.OpenFile("upload/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -67,8 +67,6 @@ func Picture(w http.ResponseWriter, r *http.Request){
 	case http.MethodPut:
 		println("this is put ")
 	default:
-		print("error code",code.InvalidRequest)
+		print("error code", code.InvalidRequest)
 	}
 }
-
-

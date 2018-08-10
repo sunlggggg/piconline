@@ -14,4 +14,3 @@ type Picture struct {
 	// 拥有者
 	UserId uint64 `json:"user_id"`
 }
-

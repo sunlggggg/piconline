@@ -53,7 +53,7 @@ type Driver interface {
 ```
 假如我们同时用到多种数据库，就可以通过调用sql.Register将不同数据库的实现注册到sql.drivers中去，用的时候再根据注册的name将对应的driver取出。
 ## 连接池
-![连接池](img/go_sql_pool.jpg)
+![连接池](../img/go_sql_pool.jpg)
 ### 初始化
 ``` go
 db, err := sql.Open("mysql", "username:password@tcp(host)/db_name?charset=utf8&allowOldPasswords=1")
