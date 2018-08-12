@@ -1,22 +1,17 @@
 package main
 
 import (
-	"github.com/sunlggggg/piconline/main/controllers"
-	"github.com/sunlggggg/piconline/main/utils"
 	"net/http"
+	"github.com/sunlggggg/piconline/main/controllers/pictureController"
+	"github.com/sunlggggg/piconline/main/controllers/userController"
+	"github.com/sunlggggg/piconline/main/config/mysql"
+	"github.com/sunlggggg/piconline/main/controllers/filecontroller"
 )
 
-type Rect struct {
-	width, length float64
-}
-
-func (rect Rect) area() float64 {
-	return rect.width * rect.length
-}
-
 func main() {
-	name := "main/data/1.txt"
-	utils.Write(name, "dd")
-	http.HandleFunc("/picture", controllers.Picture)
+	mysql.Init()
+	http.HandleFunc("/fileRoot", filecontroller.CreateRoot)
+	http.HandleFunc("/picture", pictureController.Picture)
+	http.HandleFunc("/user", userController.Register)
 	http.ListenAndServe(":8080", nil)
 }

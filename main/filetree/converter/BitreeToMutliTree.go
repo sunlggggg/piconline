@@ -1,7 +1,7 @@
 package converter
 
 import (
-	"github.com/sunlggggg/piconline/main/models"
+	"github.com/sunlggggg/piconline/main/entity"
 )
 
 // 二叉树转多叉树
@@ -47,12 +47,12 @@ import (
 //  /
 // 3
 
-func BinaryTreeConvertMutliTree(root *models.FileTreeNode) *models.MutliTree {
-	var mutliNode *models.MutliTree
+func BinaryTreeConvertMutliTree(root *entity.FileTreeNode) *entity.MutliTree {
+	var mutliNode *entity.MutliTree
 	// 非空节点才要处理
 	if root != nil {
-		mutliNode = new(models.MutliTree)
-		mutliNode.ChildNodes = make([]*models.MutliTree, 0, models.MAX)
+		mutliNode = new(entity.MutliTree)
+		mutliNode.ChildNodes = make([]*entity.MutliTree, 0, entity.MAX)
 		mutliNode.Name= root.Name
 		mutliNode.IsFile = root.IsFile
 		cur := root.LeftChild

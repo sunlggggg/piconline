@@ -1,7 +1,7 @@
 package converter
 
 import (
-	"github.com/sunlggggg/piconline/main/models"
+	"github.com/sunlggggg/piconline/main/entity"
 	"testing"
 )
 
@@ -48,15 +48,15 @@ import (
 //  /
 // 3
 func Test(t *testing.T) {
-	root := new(models.FileTreeNode).CreateNode("1", false)
-	root.LeftChild = new(models.FileTreeNode).CreateNode("2", false)
-	root.LeftChild.LeftChild = new(models.FileTreeNode).CreateNode("3", true)
-	root.LeftChild.RightChild = new(models.FileTreeNode).CreateNode("4", true)
-	root.LeftChild.RightChild.RightChild = new(models.FileTreeNode).CreateNode("5", false)
+	root := new(entity.FileTreeNode).CreateNode("1", false)
+	root.LeftChild = new(entity.FileTreeNode).CreateNode("2", false)
+	root.LeftChild.LeftChild = new(entity.FileTreeNode).CreateNode("3", true)
+	root.LeftChild.RightChild = new(entity.FileTreeNode).CreateNode("4", true)
+	root.LeftChild.RightChild.RightChild = new(entity.FileTreeNode).CreateNode("5", false)
 	//root.LeftChild.RightChild.RightChild.RightChild = new(models.FileTreeNode).CreateNode("6", true)
 	//root.LeftChild.RightChild.RightChild.LeftChild = new(models.FileTreeNode).CreateNode("7", true)
 	mt := BinaryTreeConvertMutliTree(root)
-	root = new(models.FileTreeNode)
+	root = new(entity.FileTreeNode)
 	root.BiTraverse(root)
 	root = MutliTreeConvertBinaryTree(mt)
 	root.BiTraverse(root)

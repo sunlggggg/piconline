@@ -1,4 +1,4 @@
-package controllers
+package pictureController
 
 import (
 	"fmt"
@@ -21,6 +21,8 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, "Hello astaxie!")
 }
+
+
 
 // post : curl http://localhost:8080/picture -F "pic=@1.jpg"
 func Picture(w http.ResponseWriter, r *http.Request) {
