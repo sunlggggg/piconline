@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 )
 
-//"username=sunlg&password=123456&email=sunlggggg@gmail.com" "http://127.0.0.1:8080/user"
+// "username=sunlg&password=123456&email=sunlggggg@gmail.com" "http://127.0.0.1:8080/user"
 func Register(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodPost:
