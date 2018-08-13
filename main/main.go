@@ -13,5 +13,5 @@ func main() {
 	http.HandleFunc("/fileRoot", filecontroller.CreateRoot)
 	http.HandleFunc("/picture", pictureController.Picture)
 	http.HandleFunc("/user", userController.Register)
-	http.ListenAndServe(":80", nil)
+	http.ListenAndServe(":8080", nil)
 }

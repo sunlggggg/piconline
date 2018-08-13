@@ -379,3 +379,22 @@ register_time :  12345
 
 ## 事务
 
+```go
+user := userdao.FindByName(username)
+db := mysql.Mysqldb
+tx, _ := db.Begin()
+fileId, err := filedao.CreateDir(tx)
+if err != nil {
+    tx.Rollback()
+    tx.Commit()
+    return -1, err
+}
+id, err := filerootdao.CreateRoot(tx, *user, fileId)
+if err != nil {
+    tx.Rollback()
+    return -1, err
+}
+err = tx.Commit()
+return id, err
+```
+** 注意 在使用中应该使用tx而不是db **

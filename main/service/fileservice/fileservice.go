@@ -8,20 +8,20 @@ import (
 )
 
 func CreateRoot(username string) (int64, error) {
-	// TODO 事务测试 ...
+	// 事务测试 ...
+	// 注意 在使用中应该使用tx而不是db
 	user := userdao.FindByName(username)
 	db := mysql.Mysqldb
 	tx, _ := db.Begin()
-	fileId, err := filedao.CreateDir()
+	fileId, err := filedao.CreateDir(tx)
 	if err != nil {
 		tx.Rollback()
 		tx.Commit()
 		return -1, err
 	}
-	id, err := filerootdao.CreateRoot(*user, fileId)
+	id, err := filerootdao.CreateRoot(tx, *user, fileId)
 	if err != nil {
 		tx.Rollback()
-		tx.Commit()
 		return -1, err
 	}
 	err = tx.Commit()
