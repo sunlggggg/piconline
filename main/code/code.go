@@ -7,4 +7,10 @@ const (
 	CreateSuccess         = "用户创建成功"
 	FileRootCreateFail    = "目录初始化失败"
 	FileRootCreateSuccess = "目录初始化成功"
+	LoginErr = "登陆出错"
+	LoginSuccess= "登陆成功"
+	LoginFail= "登陆失败"
+	TokenExpiration = "token过期"
+	TokenInValid = "token非法"
+	TokenAccept = "token非法"
 )

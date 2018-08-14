@@ -2,7 +2,7 @@ package userdao
 
 import (
 	"github.com/sunlggggg/piconline/main/entity"
-	"github.com/sunlggggg/piconline/main/config/mysql"
+	"github.com/sunlggggg/piconline/main/config/mysqlconfig"
 	"fmt"
 	"log"
 	"database/sql"
@@ -10,19 +10,19 @@ import (
 )
 
 func Create(user entity.User) uint64 {
-	db := mysql.Mysqldb
-	res, err := db.Exec("insert into  user (name, email, password,  register_time) values ('" + user.Name + "', '" + user.Email + "',' " + user.Password + "', '" + strconv.FormatUint(user.RegisterTime,10) + "');")
+	db := mysqlconfig.Mysqldb
+	res, err := db.Exec("insert into  user (name, email, password,  register_time) values ('" + user.Name + "', '" + user.Email + "',' " + user.Password + "', '" + strconv.FormatUint(user.RegisterTime, 10) + "');")
 	if err != nil {
 		log.Fatal(err)
 	}
 	id, err := res.LastInsertId()
-	if err !=nil {
+	if err != nil {
 		log.Fatal(err)
 	}
 	return uint64(id)
 }
 func FindByName(name string) *entity.User {
-	db := mysql.Mysqldb
+	db := mysqlconfig.Mysqldb
 	rows, err := db.Query("select * from user where name = '" + name + "';")
 	if err != nil {
 		log.Fatal(err)
@@ -69,7 +69,7 @@ func FindByName(name string) *entity.User {
 }
 
 func FindById(id uint64) *entity.User {
-	db := mysql.Mysqldb
+	db := mysqlconfig.Mysqldb
 	rows, err := db.Query("select * from user where id = " + string(id) + ";")
 	if err != nil {
 		log.Fatal(err)
@@ -103,4 +103,17 @@ func FindById(id uint64) *entity.User {
 		log.Fatal(err)
 	}
 	return nil
+}
+
+func CheckPassword(username string, password string) (bool, error) {
+	db := mysqlconfig.Mysqldb
+	rows, err := db.Query("select * from user where name =  '" + username + "' and  password = " + password + ";")
+	if err != nil {
+		return false, err
+	}
+	if rows.Next() {
+		return true, nil
+	} else {
+		return false, nil
+	}
 }

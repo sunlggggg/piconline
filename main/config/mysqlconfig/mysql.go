@@ -1,10 +1,11 @@
-package mysql
+package mysqlconfig
 
 import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 )
+
 var Mysqldb *sql.DB
 func Init() {
 	// db init

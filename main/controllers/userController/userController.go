@@ -26,3 +26,21 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		w.Write(bytesRes)
 	}
 }
+
+// curl -d "username=sunlg&password=123456" "http://127.0.0.1:8080/login"
+// 登陆成功返回token
+func Login(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodPost:
+		username := r.PostFormValue("username")
+		password := r.PostFormValue("password")
+
+		status, toekn := userservice.Login(username, password)
+		res := map[string]interface{}{
+			"status":  status,
+			"message": toekn,
+		}
+		bytesRes, _ := json.Marshal(res)
+		w.Write(bytesRes)
+	}
+}
