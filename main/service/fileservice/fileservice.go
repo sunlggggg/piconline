@@ -27,3 +27,10 @@ func CreateRoot(username string) (int64, error) {
 	err = tx.Commit()
 	return id, err
 }
+
+// 将文件结构记录到数据库
+func storeFile(dirID string, filename string ) {
+
+}
+
+

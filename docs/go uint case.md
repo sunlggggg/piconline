@@ -31,6 +31,12 @@ ok      command-line-arguments  0.013s
 ```
 
 
+5. 日志输出
+   使用 t.Log(...)
+   ```go
+   t.Log("hash", Hash("ddd", 10))
+   ```
+   ![日志输出结果](../img/go_uc_log.png)
 ## 疑问
 1. go test 时  undefined: BinaryTreeConvertMutliTree
 **解决**

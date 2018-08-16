@@ -7,11 +7,13 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"github.com/sunlggggg/piconline/main/utils"
+	"time"
 )
 
 func Hello(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()       //解析参数，默认是不会解析的
-   	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
+	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
 	fmt.Println("path", r.URL.Path)
 	fmt.Println("scheme", r.URL.Scheme)
 	fmt.Println(r.Form["url_long"])
@@ -22,9 +24,7 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello astaxie!")
 }
 
-
-
-// post : curl http://localhost:8080/picture -F "pic=@1.jpg"
+// post : curl http://localhost:8080/picture -F "file=@1.jpg"
 func Picture(w http.ResponseWriter, r *http.Request) {
 	// 读取请求类型
 	switch r.Method {
@@ -46,17 +46,18 @@ func Picture(w http.ResponseWriter, r *http.Request) {
 			w.Write(buf[:n])
 		}
 	case http.MethodPost:
-		// 上传图片
+		// 上传文件
 		println("rest post ... ")
 		r.ParseMultipartForm(32 << 20)
-		file, handler, err := r.FormFile("pic")
+		file, handler, err := r.FormFile("file")
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		defer file.Close()
 		//0666 赋予读写权限
-		f, err := os.OpenFile("upload/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		filename := time.ANSIC + utils.Hash(handler.Filename, 10)
+		f, err := os.OpenFile("upload/" + filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return
