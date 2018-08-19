@@ -6,7 +6,7 @@ import (
 	"github.com/sunlggggg/piconline/main/code"
 	"encoding/json"
 )
-
+// curl -d "username=sunlg" "http://127.0.0.1:8080/fileroot"
 func CreateRoot(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodPost:
@@ -23,4 +23,9 @@ func CreateRoot(w http.ResponseWriter, r *http.Request) {
 		bytesRes, _ := json.Marshal(res)
 		w.Write(bytesRes)
 	}
+}
+
+// 上传文件
+func UploadFile() {
+
 }

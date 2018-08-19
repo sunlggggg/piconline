@@ -10,6 +10,7 @@ import (
 
 func main() {
 	mysqlconfig.Init()
+	// curl
 	http.HandleFunc("/fileroot", filecontroller.CreateRoot)
 	http.HandleFunc("/picture", pictureController.Picture)
 	http.HandleFunc("/user", userController.Register)

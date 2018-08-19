@@ -16,3 +16,9 @@ func CreateDir(tx *sql.Tx) (int64, error) {
 		return res.LastInsertId()
 	}
 }
+
+// 插入一个文件或者文件夹
+func InsertFile(isFile bool, contentId uint64, time uint64) (int64, error) {
+	// TODO
+	return 0, nil
+}

@@ -72,12 +72,12 @@ func FindById(id uint64) *entity.User {
 	db := mysqlconfig.Mysqldb
 	rows, err := db.Query("select * from user where id = " + string(id) + ";")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	defer rows.Close()
 	cloumns, err := rows.Columns()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	values := make([]sql.RawBytes, len(cloumns))
 	scanArgs := make([]interface{}, len(values))
@@ -87,7 +87,7 @@ func FindById(id uint64) *entity.User {
 	for rows.Next() {
 		err = rows.Scan(scanArgs...)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		var value string
 		for i, col := range values {
@@ -100,7 +100,7 @@ func FindById(id uint64) *entity.User {
 		}
 	}
 	if err = rows.Err(); err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	return nil
 }

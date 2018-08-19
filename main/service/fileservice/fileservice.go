@@ -7,10 +7,10 @@ import (
 	"github.com/sunlggggg/piconline/main/dao/userdao"
 )
 
-func CreateRoot(username string) (int64, error) {
+func CreateRoot(userId uint64) (int64, error) {
 	// 事务测试 ...
 	// 注意 在使用中应该使用tx而不是db
-	user := userdao.FindByName(username)
+	user := userdao.FindById(userId)
 	db := mysqlconfig.Mysqldb
 	tx, _ := db.Begin()
 	fileId, err := filedao.CreateDir(tx)
@@ -29,8 +29,7 @@ func CreateRoot(username string) (int64, error) {
 }
 
 // 将文件结构记录到数据库
-func storeFile(dirID string, filename string ) {
-
+func InsertDir(fateuserId uint64, fatherId uint64, dirID uint64, dirName string) (uint64, error) {
+	// 暂时智能操作一个文件或者一个文件夹
+	// TODO
 }
-
-
