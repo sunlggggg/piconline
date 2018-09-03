@@ -11,6 +11,10 @@ import (
 	"time"
 )
 
+const (
+	savePath = "/Users/sunligang/go-workspace/piconline/upload/"
+)
+
 func Hello(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()       //解析参数，默认是不会解析的
 	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
@@ -31,7 +35,7 @@ func Picture(w http.ResponseWriter, r *http.Request) {
 	case http.MethodGet:
 		// 下载图片
 		println("rest get ...  ")
-		fout, err := os.Open("upload/1.jpg")
+		fout, err := os.Open(savePath + "/1.jpg")
 		if err != nil {
 			println(err)
 		}
@@ -57,7 +61,8 @@ func Picture(w http.ResponseWriter, r *http.Request) {
 		defer file.Close()
 		//0666 赋予读写权限
 		filename := time.ANSIC + utils.Hash(handler.Filename, 10)
-		f, err := os.OpenFile("upload/" + filename, os.O_WRONLY|os.O_CREATE, 0666)
+		println(filename)
+		f, err := os.OpenFile(savePath+"1.jpg", os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
 			return

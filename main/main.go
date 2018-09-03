@@ -16,7 +16,7 @@ func main() {
 	http.HandleFunc("/root", filecontroller.CreateRoot)
 	// curl -d "token=eyJhbGc ... &fatherID=13" "http://127.0.0.1:8080/dir"
 	http.HandleFunc("/dir", filecontroller.CreateDir)
-	// curl -F "token=eyJhbGc ... &fatherID=14&name=file1&isPublic=false&description=file01&file=@1.jpg" "http://127.0.0.1:8080/dir"
+	// curl -F "file=@1.jpg" "http://127.0.0.1:8080/file?token=eyjh...&fatherID=14&name=file1&isPublic=0&description=file01"
 	http.HandleFunc("/file", filecontroller.UploadFile)
 	// curl http://localhost:8080/picture -F "file=@1.jpg"
 	http.HandleFunc("/picture", pictureController.Picture)
