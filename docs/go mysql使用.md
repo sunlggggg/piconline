@@ -259,7 +259,7 @@ mysql> create table user(
        
 ```
 ENGINE 设置存储引擎，CHARSET 设置编码
-### 驱动注册 
+### 驱动注册 
 ```go
 package main
 
