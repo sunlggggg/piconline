@@ -12,8 +12,6 @@ func CreateRoot(userId uint64) (int64, error) {
 	// 注意 在使用中应该使用tx而不是db
 	user := userdao.FindById(userId)
 	db := mysqlconfig.Mysqldb
-	tx, _ := db.Begin()
-	fileId, err := filedao.CreateDir(tx)
 	if err != nil {
 		tx.Rollback()
 		tx.Commit()
@@ -32,4 +30,5 @@ func CreateRoot(userId uint64) (int64, error) {
 func InsertDir(fateuserId uint64, fatherId uint64, dirID uint64, dirName string) (uint64, error) {
 	// 暂时智能操作一个文件或者一个文件夹
 	// TODO
+	return 0,nil
 }

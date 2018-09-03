@@ -31,7 +31,11 @@ func Login(username string, password string) (status string, token string) {
 	if isRight {
 		jwt := jwtutil.JWT{}
 		jwt.Header = jwtutil.Header{Alg: "HS256", Typ: "JWT"}
-		jwt.PayLoad = jwtutil.PayLoad{ExpireTime: jwtconfig.ValidTime, Name: username, CreateTime: time.Now().Unix()}
+		jwt.PayLoad = jwtutil.PayLoad{
+			ExpireTime: jwtconfig.ValidTime,
+			Name:       username,
+			UserID:     userdao.FindByName(username).Id,
+			CreateTime: time.Now().Unix()}
 		result, _ := jwt.Encode()
 		return code.LoginSuccess, result
 	} else {

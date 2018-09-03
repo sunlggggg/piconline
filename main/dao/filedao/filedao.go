@@ -1,24 +1,55 @@
 package filedao
 
 import (
-	"strconv"
-	"time"
-	"database/sql"
+	"github.com/sunlggggg/piconline/main/config/mysqlconfig"
+	"log"
 )
 
-func CreateDir(tx *sql.Tx) (int64, error) {
-	strTime := strconv.FormatInt(time.Now().Unix(), 10)
-	res, err := tx.Exec("insert into file(isFile, createTime, updateTime) values (false , '" + strTime + "' , '" + strTime + "')")
-
+// 插入
+func InsertFile(userID uint64, fatherID uint64, contentID uint64, createTime uint64) (int64) {
+	db := mysqlconfig.Mysqldb
+	res, err := db.Exec("insert into  file (userID, fatherID, isFile,  contentID, updateTime ,createTime) values (?,?,?,?,?,?);",
+		userID, fatherID, true, contentID, createTime, createTime)
 	if err != nil {
-		return -1, err
-	} else {
-		return res.LastInsertId()
+		log.Fatal(err)
 	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		log.Println(err)
+	}
+	return id
 }
 
-// 插入一个文件或者文件夹
-func InsertFile(isFile bool, contentId uint64, time uint64) (int64, error) {
-	// TODO
-	return 0, nil
+// 插入
+func InsertDir(userID uint64, fatherID uint64, createTime uint64) (int64) {
+	db := mysqlconfig.Mysqldb
+	res, err := db.Exec("insert into  file (userID, fatherID, isFile,  contentID, updateTime ,createTime) values (?,?,?,?,?,?)",
+		userID, fatherID, false, nil, createTime, createTime)
+	if err != nil {
+		log.Fatal(err)
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		log.Println(err)
+	}
+	return id
+}
+
+// 插入
+func InsertRootDir(userID uint64, createTime uint64) (int64) {
+	db := mysqlconfig.Mysqldb
+	res, err := db.Exec("insert into  file (userID, isFile,  contentID, updateTime ,createTime) values (?,?,?,?,?)",
+		userID,
+		false,
+		nil,
+		createTime,
+		createTime)
+	if err != nil {
+		log.Fatal(err)
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		log.Println(err)
+	}
+	return id
 }

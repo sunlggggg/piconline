@@ -9,7 +9,6 @@ import (
 	"strings"
 	"github.com/sunlggggg/piconline/main/config/jwtconfig"
 	"time"
-	state "github.com/sunlggggg/piconline/main/code"
 )
 
 // SALT 密钥
@@ -22,9 +21,10 @@ type Header struct {
 
 // PayLoad 负载
 type PayLoad struct {
-	ExpireTime  int16  `json:"expire_time"`
+	ExpireTime int16  `json:"expire_time"`
 	CreateTime int64  `json:"create_time"`
 	Name       string `json:"name"`
+	UserID     uint64 `json:"user_id"`
 }
 
 // JWT 完整的本体
@@ -61,28 +61,28 @@ func getHmacCode(s string) string {
 }
 
 // Decode 验证 jwt 签名是否正确,并将json内容解析出来
-func (jwt *JWT) Decode(code string) (bool, string, error) {
+func (jwt *JWT) Decode(code string) (bool) {
 
 	arr := strings.Split(code, ".")
 	if len(arr) != 3 {
-		return false, state.TokenInValid, nil
+		return false
 	}
 
 	// 验证签名是否正确
 	format := arr[0] + "." + arr[1]
 	signature := getHmacCode(format)
 	if signature != arr[2] {
-		return false, state.TokenInValid, nil
+		return false
 	}
 
 	header, err := base64.StdEncoding.DecodeString(arr[0])
 	if err != nil {
-		return false, state.TokenInValid, err
+		return false
 	}
 	payload, err := base64.StdEncoding.DecodeString(arr[1])
 
 	if err != nil {
-		return false, state.TokenInValid, err
+		return false
 	}
 
 	json.Unmarshal(header, &jwt.Header)
@@ -90,7 +90,7 @@ func (jwt *JWT) Decode(code string) (bool, string, error) {
 	timeInterval := time.Now().Unix() - jwt.PayLoad.CreateTime
 
 	if timeInterval > int64(jwt.PayLoad.ExpireTime) {
-		return false, state.TokenExpiration, nil
+		return false
 	}
-	return true, state.TokenAccept, nil
+	return true
 }

@@ -10,7 +10,5 @@ const (
 	LoginErr = "登陆出错"
 	LoginSuccess= "登陆成功"
 	LoginFail= "登陆失败"
-	TokenExpiration = "token过期"
-	TokenInValid = "token非法"
-	TokenAccept = "token非法"
+	InValidToken = "无效的Token"
 )
