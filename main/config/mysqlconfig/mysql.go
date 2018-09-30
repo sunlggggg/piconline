@@ -5,7 +5,6 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 )
-
 var Mysqldb *sql.DB
 func Init() {
 	// db init
